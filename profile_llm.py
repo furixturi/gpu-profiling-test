@@ -9,7 +9,8 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-1.5B").to("cuda")
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
 
 for _ in range(3):
-    inputs = torch.randint(0, 100, (16, 256), device="cuda") # dummy input
+    # dummy input, batch size 16, sequence length 256
+    inputs = torch.randint(0, 100, (16, 256), device="cuda") 
     loss = torch.mean(model(inputs).logits) # dummy loss
     loss.backward()
     optimizer.step()
